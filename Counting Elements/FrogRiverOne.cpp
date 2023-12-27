@@ -49,3 +49,16 @@ Write an efficient algorithm for the following assumptions:
  * N and X are integers within the range [1..100,000];
  * each element of array A is an integer within the range [1..X].
 */
+
+#include <set>
+
+int solution(int X, vector<int> &A) {
+    std::set<int> leafs;
+    for (unsigned i = 0; i < A.size(); ++i)
+    {
+        leafs.insert(A[i]);
+        if (leafs.size() == X)
+            return static_cast<int>(i);
+    }
+    return -1;
+}
