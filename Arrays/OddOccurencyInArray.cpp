@@ -39,6 +39,7 @@ Write an efficient algorithm for the following assumptions:
 
 int solution(vector<int> &A) {
     std::sort(A.begin(), A.end());
+    if (A.size() == 1) return A.back();
     for (unsigned i = 0; i < A.size() - 1; i += 2)
     {
         if (A[i] != A[i + 1]) return A[i];
