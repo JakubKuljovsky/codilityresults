@@ -49,3 +49,30 @@ Write an efficient algorithm for the following assumptions:
  * N and M are integers within the range [1..100,000];
  * each element of array A is an integer within the range [1..N + 1].
 */
+
+vector<int> solution(int N, vector<int> &A) {
+    std::vector<int> B(N);
+    int baseNumber{0};
+    int biggestNumber{0};
+    for (unsigned i = 0; i < A.size(); ++i)
+    {
+        unsigned index = A[i] - 1;
+        if (A[i] > N)
+        {
+            baseNumber = biggestNumber;
+        }
+        else
+        {
+            if (B[index] < baseNumber)
+                B[index] = baseNumber;
+            if (++B[index] > biggestNumber)
+                biggestNumber = B[index];
+        }
+    }
+    for (unsigned i = 0; i < B.size(); ++i)
+    {
+        if (B[i] < baseNumber)
+            B[i] = baseNumber;
+    }
+    return B;
+}
