@@ -42,3 +42,20 @@ Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [2..100,000];
  * each element of array A is an integer within the range [−1,000..1,000].
 */
+#include <numeric>
+
+int solution(vector<int> &A) {
+    int left{A[0]};
+    int right{std::accumulate(A.begin() + 1, A.end(), 0)};
+    int lowest{std::abs(left - right)};
+    for (unsigned i = 1; i < A.size() - 1 ; ++i)
+    {
+        left += A[i];
+        right -= A[i];
+        if (std::abs(left - right) < lowest)
+        {
+            lowest = std::abs(left - right);
+        }
+    }
+    return lowest;
+}
