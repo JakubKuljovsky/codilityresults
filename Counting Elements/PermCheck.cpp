@@ -40,3 +40,21 @@ Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [1..100,000];
  * each element of array A is an integer within the range [1..1,000,000,000].
 */
+
+#include <set>
+
+int solution(vector<int> &A) {
+    std::set<int> B;
+    for (unsigned i = 0; i < A.size(); ++i)
+    {
+        if(!B.insert(A[i]).second)
+        {
+            return 0;
+        }
+    }
+    if (B.upper_bound(A.size()) != B.end())
+    {
+        return 0;
+    }
+    return 1;
+}
