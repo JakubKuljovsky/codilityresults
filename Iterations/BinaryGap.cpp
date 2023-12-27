@@ -23,3 +23,29 @@ return 0, because N has binary representation '100000' and thus no binary gaps.
 Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [1..2,147,483,647].
 */
+
+int solution(int N) {
+   int biggestGap{0};
+   bool startCounting{false};
+   int gap{0};
+   while (N != 1)
+   {
+       int number{N % 2};
+       N /= 2;
+
+       if (startCounting == true and number == 0)
+       {
+            gap++;
+       }
+       else if (startCounting == true and number == 1) 
+       {
+            biggestGap = std::max(gap, biggestGap);
+            gap = 0;
+       }
+       else if (number == 1)
+       {
+           startCounting = true;
+       }
+   }
+   return  std::max(gap, biggestGap);
+}
