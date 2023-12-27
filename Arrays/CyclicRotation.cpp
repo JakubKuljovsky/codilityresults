@@ -44,3 +44,15 @@ Assume that:
 In your solution, focus on correctness. The performance of your solution will not be
 the focus of the assessment.
 */
+#include <algorithm>
+
+vector<int> solution(vector<int> &A, int K)
+{   
+    if (A.size() == 0)
+        return {};
+
+    K %= A.size();
+
+    std::rotate(A.rbegin(), A.rbegin() + K, A.rend());
+    return A;
+}
