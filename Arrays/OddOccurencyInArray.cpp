@@ -35,3 +35,13 @@ Write an efficient algorithm for the following assumptions:
  * each element of array A is an integer within the range [1..1,000,000,000];
  * all but one of the values in A occur an even number of times.
 */
+#include <algorithm>
+
+int solution(vector<int> &A) {
+    std::sort(A.begin(), A.end());
+    for (unsigned i = 0; i < A.size() - 1; i += 2)
+    {
+        if (A[i] != A[i + 1]) return A[i];
+    }
+    return A.back();
+}
