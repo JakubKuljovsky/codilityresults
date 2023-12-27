@@ -23,3 +23,9 @@ Write an efficient algorithm for the following assumptions:
  * the elements of A are all distinct;
  * each element of array A is an integer within the range [1..(N + 1)].
 */
+
+#include <numeric>
+
+int solution(vector<int> &A) {
+    return  ((1 + A.size() + 1) * (A.size() + 1) / 2) - std::accumulate(A.begin(), A.end(), 0);
+}
