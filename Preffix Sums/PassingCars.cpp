@@ -37,3 +37,26 @@ Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [1..100,000];
  * each element of array A is an integer that can have one of the following values: 0, 1.
 */
+
+int solution(vector<int> &A) {
+    int east{0};
+    int west{0};
+    int passingCars{0};
+    for (unsigned i = 0; i < A.size(); ++i)
+    {
+        if (A[i] == 0)
+        {
+            east++;
+        }
+        else
+        {
+            west++;
+            passingCars += east;
+        }
+        if (passingCars > 1'000'000'000)
+        {
+            return -1;
+        }
+    }
+    return passingCars;
+}
