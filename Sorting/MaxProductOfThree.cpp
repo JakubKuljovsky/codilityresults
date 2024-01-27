@@ -35,3 +35,24 @@ Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [3..100,000];
  * each element of array A is an integer within the range [−1,000..1,000].
 */
+#include <algorithm>
+
+int solution(vector<int> &A) {
+    std::vector<int> biggest;
+    std::partial_sort(A.begin(), A.begin() + 3, A.end(), 
+                    [](int first, int last){ 
+                        return first > last; 
+                    });
+    biggest.push_back(A[0]);
+    biggest.push_back(A[1]);
+    biggest.push_back(A[2]);
+    std::partial_sort(A.begin(), A.begin() + 3, A.end(), 
+                    [](int first, int last){ 
+                        return first < last; 
+                    });
+    std::vector<int> lowest;
+    lowest.push_back(A[0]);
+    lowest.push_back(A[1]);
+
+    return std::max(biggest[0] * biggest[1] * biggest[2], biggest[0] * lowest[0] * lowest[1]) ;
+}
