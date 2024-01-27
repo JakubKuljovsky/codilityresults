@@ -29,3 +29,22 @@ Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [0..100,000];
  * each element of array A is an integer within the range [−2,147,483,648..2,147,483,647].
 */
+#include <algorithm>
+
+
+int solution(std::vector<int>& A) {
+
+    if (A.size() < 3) { return 0; }
+
+    // Assume P < Q < R
+    // after sort: A[P] > A[Q] and A[P] > A[R] => A[P] + A[Q] > A[R] and A[P] + A[R] > A[Q]
+    std::sort(A.begin(), A.end(), [](int a, int b) { return a > b; });
+
+    // is A[Q] + A[R] > A[P] ? 
+    for (unsigned int i = 0; i < A.size() - 2; ++i) {
+        if (static_cast<long long>(A[i]) < static_cast<long long>(A[i + 2]) + static_cast<long long>(A[i + 1])) {
+            return 1;
+        }
+    }
+    return 0;
+}
