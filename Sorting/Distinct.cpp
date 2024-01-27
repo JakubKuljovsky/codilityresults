@@ -18,3 +18,12 @@ Write an efficient algorithm for the following assumptions:
  * each element of array A is an integer within the range
    [−1,000,000..1,000,000].
 */
+#include <set>
+int solution(vector<int> &A) {
+    std::set<int> distictNumbers;
+    for (auto a: A)
+    {
+        distictNumbers.insert(a);
+    }
+    return distictNumbers.size();
+}
