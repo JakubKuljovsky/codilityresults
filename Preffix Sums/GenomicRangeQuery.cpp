@@ -49,3 +49,67 @@ Write an efficient algorithm for the following assumptions:
  * P[K] ≤ Q[K], where 0 ≤ K < M;
  * string S consists only of upper-case English letters A, C, G, T.
 */
+
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <set>
+
+
+std::vector<int> solution(
+    std::string& S,
+    std::vector<int>& P,
+    std::vector<int>& Q) 
+{
+    std::set<int> A;
+    std::set<int> C;
+    std::set<int> G;
+
+    std::vector<int> sol;
+
+    for (unsigned int i = 0; i < S.size(); ++i)
+    {
+        switch (S[i])
+        {
+        case 'A':
+            A.insert(i);
+            break;
+        case 'C':
+            C.insert(i);
+            break;
+        case 'G':
+            G.insert(i);
+            break;
+        default:
+            break;
+        }
+    }
+
+    for (unsigned int i = 0; i < P.size(); ++i)
+    {
+        auto it = A.lower_bound(P[i]);
+        if (it != A.end() && *it <= Q[i])
+        {
+            sol.push_back(1);
+            continue;
+        }
+        it = C.lower_bound(P[i]);
+        if (it != C.end() && *it <= Q[i])
+        {
+            sol.push_back(2);
+            continue;
+        }
+        it = G.lower_bound(P[i]);
+        if (it != G.end() && *it <= Q[i])
+        {
+            sol.push_back(3);
+            continue;
+        }
+        sol.push_back(4);
+    }
+
+    return sol;
+}
+
+
