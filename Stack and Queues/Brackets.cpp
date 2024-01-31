@@ -21,3 +21,60 @@ Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [0..200,000];
  * string S is made only of the following characters: '(', '{', '[', ']', '}' and/or ')'.
 */
+#include <stack>
+
+int solution(std::string& S) {
+    if (S.empty())
+        return 1;
+    std::stack<char> st;
+    for (char c : S)
+    {
+        switch (c)
+        {
+        case '{':
+            st.push(c);
+            break;
+        case '(':
+            st.push(c);
+            break;
+        case  '[':
+            st.push(c);
+            break;
+        case '}':
+            if (st.top() == '{')
+            {
+                st.pop();
+            }
+            else
+            {
+                return 0;
+            }
+            break;
+        case ')':
+            if (st.top() == '(')
+            {
+                st.pop();
+            }
+            else
+            {
+                return 0;
+            }
+            break;
+        case  ']':
+            if (st.top() == '[')
+            {
+                st.pop();
+            }
+            else
+            {
+                return 0;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    if (!st.empty())
+        return 0;
+    return 1;
+}
