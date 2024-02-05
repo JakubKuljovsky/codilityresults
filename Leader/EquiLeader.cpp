@@ -38,3 +38,87 @@ Write an efficient algorithm for the following assumptions:
   *  N is an integer within the range [1..100,000];
   *  each element of array A is an integer within the range [−1,000,000,000..1,000,000,000].
 */
+#include <map>
+#include <vector>
+#include <algorithm>
+
+std::map<int, int> makeAMap(std::vector<int>& A, int begin, int end) {
+
+    std::map<int, int> B;
+
+    for (; begin < end; ++begin)
+    {
+        if (!B.try_emplace(A[begin], 1).second)
+        {
+            B[A[begin]]++;
+        }
+    }
+    return B;
+}
+
+int findLeader(std::map<int, int>& m, int size)
+{
+    auto value = std::max_element(std::begin(m), std::end(m),
+        [](const std::map<int, int>::value_type a, const std::map<int, int>::value_type b) 
+        { return a.second < b.second; });
+    int halfSize = size / 2;
+    if (value->second > halfSize)
+    {
+        return value->first;
+    }
+    return -1;
+}
+
+int add(std::map<int, int>& m, int element, int& frontLeader, size_t size)
+{
+    if (!m.try_emplace(element, 1).second)
+    {
+        m[element]++;
+    }
+    if (frontLeader == element)
+    {
+        return frontLeader;
+    }
+    frontLeader = findLeader(m, size);
+    return frontLeader;
+}
+
+int remove(std::map<int, int>& m, int element, int& backLeader, size_t size)
+{
+    m[element]--;
+
+    backLeader =  findLeader(m, size);
+    return backLeader;
+
+}
+
+int solution(std::vector<int>& A)
+{
+    if (A.size() < 2)
+    {
+        return 0;
+    }
+    std::map<int, int> front{ };
+    front.emplace(A[0], 1);
+    std::map<int, int> back = makeAMap(A, 1, A.size());
+    int frontLeader{A[0]};
+    int backLeader{ findLeader(back, A.size() - 1) };
+    if (backLeader == -1)
+    {
+        return 0;
+    }
+    int result{0};
+    if (frontLeader == backLeader)
+    {
+        result++;
+    }
+    for (unsigned int i = 1; i < A.size() - 1; ++i)
+    {
+        if (add(front, A[i], frontLeader, i + 1) == remove(back, A[i], backLeader, A.size() - 1 - i))
+        {
+            if (frontLeader == -1) continue;
+            result++;
+        }
+    }
+    return result;
+}
