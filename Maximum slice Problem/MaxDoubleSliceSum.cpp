@@ -43,3 +43,32 @@ Write an efficient algorithm for the following assumptions:
   *  N is an integer within the range [3..100,000];
   *  each element of array A is an integer within the range [−10,000..10,000].
 */
+
+int solution(std::vector<int>& A) {
+
+    int max{0};
+
+    if (A.size() < 4)
+    {
+        return max;
+    }
+
+    std::vector<int> prepFromLeft(A.size(), 0);
+    std::vector<int> prepFromRight(A.size(), 0);
+    
+    for (unsigned int i = 1; i < A.size() - 1; ++i)
+    {
+        prepFromLeft[i] = std::max(prepFromLeft[i - 1] + A[i], 0);
+    }
+
+    for (unsigned int i = A.size() - 2 ; i > 0 ; --i)
+    {
+        prepFromRight[i] = std::max(prepFromRight[i + 1] + A[i], 0);
+    }
+
+    for (unsigned int i = 0; i < prepFromLeft.size() - 2; ++i)
+    {
+        max = std::max(max, prepFromLeft[i] + prepFromRight[i + 2]);
+    }
+    return max;
+}
