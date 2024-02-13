@@ -44,15 +44,23 @@ Assume that:
 In your solution, focus on correctness. The performance of your solution will not be
 the focus of the assessment.
 */
+
+// Algorithm library is needed for std::rotate function
 #include <algorithm>
 
-vector<int> solution(vector<int> &A, int K)
+
+std::vector<int> solution(std::vector<int> &A, int K)
 {   
+    // exclude trivial cases
     if (A.size() == 0)
         return {};
 
+    // If K > A.size() then after A.size() steps the array will be the same as at the beginning.
     K %= A.size();
 
+    // And finally we use algorithm from algorithm library.
     std::rotate(A.rbegin(), A.rbegin() + K, A.rend());
+
+    // return rotated array
     return A;
 }
