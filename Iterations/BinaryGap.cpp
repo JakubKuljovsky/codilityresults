@@ -24,6 +24,11 @@ Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [1..2,147,483,647].
 */
 
+// The principle of solving this problem will be that 
+// I gradually remove the digits from the end of the number 
+// using modulo operations and dividing by 2, which will give me 1 or 0.
+// by counting the zeros in the gap and comparing the size of the gaps, 
+// I get the biggest gap size.
 int solution(int N) {
    // biggestGapSize holds the largest gapSize.
    int biggestGapSize{0};
