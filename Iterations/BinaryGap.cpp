@@ -25,27 +25,43 @@ Write an efficient algorithm for the following assumptions:
 */
 
 int solution(int N) {
-   int biggestGap{0};
+   // biggestGapSize holds the largest gapSize.
+   int biggestGapSize{0};
+   // startCounting is true if one of the digits was already 1
    bool startCounting{false};
-   int gap{0};
+   // gapSize is the counter for the current gap.
+   int gapSize{0};
+
    while (N != 1)
    {
-       int number{N % 2};
+       // In these two lines, we store the lowest digit in the variable binaryDigit
+       // and remove it from the entered number N.
+       int binaryDigit{N % 2};
        N /= 2;
 
-       if (startCounting == true and number == 0)
+       if (startCounting == true and binaryDigit == 0)
        {
-            gap++;
+            // If the variable binaryDigit is zero and the variable startCounting is true, 
+            // then it means that we are in a gap, so we add one to the variable gap
+            // and go to the next binaryDigit.
+            gapSize++;
        }
-       else if (startCounting == true and number == 1) 
+       else if (startCounting == true and binaryDigit == 1) 
        {
-            biggestGap = std::max(gap, biggestGap);
-            gap = 0;
+            // If the variable binaryDigit is equal to 1 and the variable startCounting is true,
+            // then we are at the end of the gap,
+            // we compare the current gap size with the largest gap size and keep the largest.
+            biggestGapSize = std::max(gapSize, biggestGapSize);
+            gapSize = 0;
        }
-       else if (number == 1)
+       else if (binaryDigit == 1)
        {
+           // If the binaryDigit variable is equal to 1 but the startCounting variable is false,
+           // then we are at the beginning of the first gap and we can start counting the gap sizes.
            startCounting = true;
        }
    }
-   return  std::max(gap, biggestGap);
+
+   // Since we are going from behind, our last digit is one and closes the gap.
+   return  std::max(gapSize, biggestGapSize);
 }
