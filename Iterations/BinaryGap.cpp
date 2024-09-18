@@ -24,15 +24,14 @@ Write an efficient algorithm for the following assumptions:
  * N is an integer within the range [1..2,147,483,647].
 */
 
-// The principle of solving this problem will be that 
-// I gradually remove the digits from the end of the number 
-// using modulo operations and dividing by 2, which will give me 1 or 0.
-// by counting the zeros in the gap and comparing the size of the gaps, 
-// I get the biggest gap size.
+// The principle of solving this problem is to gradually remove the digits from the end
+// using modulo operations and dividing by 2, which will give either 1 or 0.
+// By counting the zeros in the gap and comparing the size of the gaps, 
+// we can find the largest gap size.
 int solution(int N) {
    // biggestGapSize holds the largest gapSize.
    int biggestGapSize{0};
-   // startCounting is true if one of the digits was already 1
+   // startCounting is true if we have already encountered a 1.
    bool startCounting{false};
    // gapSize is the counter for the current gap.
    int gapSize{0};
@@ -46,27 +45,29 @@ int solution(int N) {
 
        if (startCounting == true and binaryDigit == 0)
        {
-            // If the variable binaryDigit is zero and the variable startCounting is true, 
-            // then it means that we are in a gap, so we add one to the variable gap
-            // and go to the next binaryDigit.
+            // If binaryDigit is zero and startCounting is true, 
+            // we are in a gap, so we increment gapSize 
+            // and proceed to the next binaryDigit.
             gapSize++;
        }
        else if (startCounting == true and binaryDigit == 1) 
        {
-            // If the variable binaryDigit is equal to 1 and the variable startCounting is true,
-            // then we are at the end of the gap,
-            // we compare the current gap size with the largest gap size and keep the largest.
+            // If binaryDigit is 1 and startCounting is true,
+            // we've reached the end of a gap.
+            // Compare the current gap size with the largest gap size
+            // and store the largest.
             biggestGapSize = std::max(gapSize, biggestGapSize);
             gapSize = 0;
        }
        else if (binaryDigit == 1)
        {
-           // If the binaryDigit variable is equal to 1 but the startCounting variable is false,
-           // then we are at the beginning of the first gap and we can start counting the gap sizes.
+           // If binaryDigit is 1 but startCounting is false,
+           // we are at the beginning of the first gap and can start counting the gap sizes.
            startCounting = true;
        }
    }
 
-   // Since we are going from behind, our last digit is one and closes the gap.
+   // Since we are processing from the least significant bit,
+   // the last digit is 1, which closes the gap.
    return  std::max(gapSize, biggestGapSize);
 }
