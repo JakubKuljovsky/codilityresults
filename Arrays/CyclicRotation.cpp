@@ -48,7 +48,8 @@ the focus of the assessment.
 // Algorithm library is needed for std::rotate function
 #include <algorithm>
 
-
+// We solve this task simply by using the std::rotate function,
+// which performs a left rotation on a range of elements.
 std::vector<int> solution(std::vector<int> &A, int K)
 {   
     // exclude trivial cases
