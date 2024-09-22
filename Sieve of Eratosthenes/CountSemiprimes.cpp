@@ -38,7 +38,5 @@ Write an efficient algorithm for the following assumptions:
   *  N is an integer within the range [1..50,000];
   *  M is an integer within the range [1..30,000];
   *  each element of arrays P and Q is an integer within the range [1..N];
-*/
-P[i] ≤ Q[i].
-
+  * P[i] ≤ Q[i].
 */
