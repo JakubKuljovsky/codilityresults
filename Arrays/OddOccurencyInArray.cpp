@@ -35,12 +35,21 @@ Write an efficient algorithm for the following assumptions:
  * each element of array A is an integer within the range [1..1,000,000,000];
  * all but one of the values in A occur an even number of times.
 */
+
+// We will take advantage of the fact that only one element
+// is unpaired and that the xor operation of two identical numbers is zero.
+// So if we use XOR to connect all the numbers, the resulting number we are looking for will remain
+// e.g. 4(0100), 7(0111), 4(0100), 3(0011), 7(0111)
+// 0100(4) ^ 0111(7) = 0011(3)
+// 0011(3) ^ 0100(4) = 0111(7)
+// 0111(7) ^ 0011(3) = 0100(4)
+// 0100(4) ^ 0111(7) = 0011(3)
 int solution(vector<int> &A) {
-   int number{0};
+   int searched_number{0};
    for (auto a: A)
    {
        number ^= a;
    }
 
-   return number;
+   return searched_number;
 }
