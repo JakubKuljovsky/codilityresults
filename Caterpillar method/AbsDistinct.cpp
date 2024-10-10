@@ -34,17 +34,26 @@ Write an efficient algorithm for the following assumptions:
   *  array A is sorted in non-decreasing order.
 */
 
+// To find number absolute distinct numbers, we use std::set,
+// which tells us whether the entered number is already in the set 
+// of absolute distinct numbers in log(n) complexity.
 #include <set>
 
 int solution(vector<int> &A) {
-    std::set<int> values;
+    // set of absolute distinct numbers
+    std::set<int> numbers;
+    // variable result is a counter for absolute distinct numbers
     int result{};
     for (auto a: A)
     {
-        if (values.insert(abs(a)).second)
+        // for all numbers in vector A
+        // if absolute value of number is not yet in numbers set,      
+        //then add him into set and add 1 to result.
+        if (numbers.insert(abs(a)).second)
         {
             result++;
         }
     }
+    // return counter of absolute distinct numbers
     return result;
 }
