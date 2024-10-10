@@ -42,18 +42,15 @@ Write an efficient algorithm for the following assumptions:
 int solution(vector<int> &A) {
     // set of absolute distinct numbers
     std::set<int> numbers;
-    // variable result is a counter for absolute distinct numbers
-    int result{};
+
     for (auto a: A)
     {
         // for all numbers in vector A
         // if absolute value of number is not yet in numbers set,      
-        //then add him into set and add 1 to result.
-        if (numbers.insert(abs(a)).second)
-        {
-            result++;
-        }
+        // then add him into set.
+        numbers.insert(abs(a));
     }
-    // return counter of absolute distinct numbers
-    return result;
+  
+    // return size of absolute distinct numbers set
+    return numbers.size();
 }
