@@ -39,7 +39,6 @@ Write an efficient algorithm for the following assumptions:
   *  M is an integer within the range [0..100,000];
   *  each element of array A is an integer within the range [0..M].
 */
-
 #include <iostream>
 #include <set>
 #include <utility>
@@ -57,7 +56,6 @@ int solution(int M, std::vector<int>& A) {
 
     for (; back < A.size(); ++back)
     {
-
         if (values[A[back]] ) {
             while (A[front] != A[back]) {
                 front++;
@@ -65,6 +63,7 @@ int solution(int M, std::vector<int>& A) {
             }
             front++;
             values[A[back]] = false;
+            numberOfSlices++;
         }
         else {
             values[A[back]] = true;
@@ -82,6 +81,5 @@ int solution(int M, std::vector<int>& A) {
         numberOfSlices += back - front;
     }
 
-   
     return numberOfSlices;
 }
