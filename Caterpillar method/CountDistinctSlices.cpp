@@ -40,34 +40,48 @@ Write an efficient algorithm for the following assumptions:
   *  each element of array A is an integer within the range [0..M].
 */
 
-
+#include <iostream>
 #include <set>
 #include <utility>
+#include <vector>
 
 
-int solution(int M, vector<int> &A) 
-{
-    std::set<std::pair<int, int>> distinctSlices;
-    std::set<int> numbers;
-    
-    numbers.insert(A[0]);
-    distinctSlices.insert(std::make_pair(A[0], A[0]));
+int solution(int M, std::vector<int>& A) {
+    if (A.size() == 0) return 0;
+    if (M == 0) return 1;
+    int front{ 0 };
+    int back{0};
+    std::vector<bool> values(M, false);
+    int numberOfSlices{ 0 };
 
-    for (unsigned int i = 1; i < A.size(); ++i)
-        {
-            for(auto number : numbers) {
-                distinctSlices.insert(std::make_pair(number, A[i]));
+
+    for (; back < A.size(); ++back)
+    {
+
+        if (values[A[back]] ) {
+            while (A[front] != A[back]) {
+                front++;
+                numberOfSlices += back - front;
             }
-            distinctSlices.insert(std::make_pair(A[i], A[i]));
-            numbers.insert(A[i]);
-            if (distinctSlices.size() >= 1000000000) {
-                return 1000000000;
-            }
+            front++;
+            values[A[back]] = false;
+        }
+        else {
+            values[A[back]] = true;
+            numberOfSlices++;
         }
 
-    for(auto slice : distinctSlices) {
-        std::cout << "(" << slice.first << ", " << slice.second << ")" << std::endl;
+        if (numberOfSlices >= 1'000'000'000)
+        {
+            return  1'000'000'000;
+        }
     }
 
-        return distinctSlices.size();
+    while (front != back) {
+        front++;
+        numberOfSlices += back - front;
+    }
+
+   
+    return numberOfSlices;
 }
