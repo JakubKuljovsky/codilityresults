@@ -44,7 +44,6 @@ Write an efficient algorithm for the following assumptions:
 #include <utility>
 #include <vector>
 
-
 int solution(int M, std::vector<int>& A) {
     if (A.size() == 0) return 0;
     if (M == 0) return 1;
@@ -62,7 +61,6 @@ int solution(int M, std::vector<int>& A) {
                 numberOfSlices += back - front;
             }
             front++;
-            values[A[back]] = false;
             numberOfSlices++;
         }
         else {
