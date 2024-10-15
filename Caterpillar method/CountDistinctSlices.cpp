@@ -57,6 +57,7 @@ int solution(int M, std::vector<int>& A) {
     {
         if (values[A[back]] ) {
             while (A[front] != A[back]) {
+                values[A[front]] = false;
                 front++;
                 numberOfSlices += back - front;
             }
