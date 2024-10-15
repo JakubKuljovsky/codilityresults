@@ -39,9 +39,7 @@ Write an efficient algorithm for the following assumptions:
   *  M is an integer within the range [0..100,000];
   *  each element of array A is an integer within the range [0..M].
 */
-#include <iostream>
-#include <set>
-#include <utility>
+
 #include <vector>
 
 int solution(int M, std::vector<int>& A) {
