@@ -28,6 +28,12 @@ Write an efficient algorithm for the following assumptions:
 */
 
 int solution(int X, int Y, int D) {
+    // By calculating the difference of X and Y,
+    // we get the total distance the frog has to jump
     int distance{Y - X};
+
+    // if the distance is exactly divisible by the length of the jump,
+    // then it is enough to divide the distance by the length of the jump and if it is not,
+    // we must add one.
     return distance % D ? (distance / D)  + 1 : (distance / D);
 }
