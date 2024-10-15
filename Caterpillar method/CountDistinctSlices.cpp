@@ -39,3 +39,35 @@ Write an efficient algorithm for the following assumptions:
   *  M is an integer within the range [0..100,000];
   *  each element of array A is an integer within the range [0..M].
 */
+
+
+#include <set>
+#include <utility>
+
+
+int solution(int M, vector<int> &A) 
+{
+    std::set<std::pair<int, int>> distinctSlices;
+    std::set<int> numbers;
+    
+    numbers.insert(A[0]);
+    distinctSlices.insert(std::make_pair(A[0], A[0]));
+
+    for (unsigned int i = 1; i < A.size(); ++i)
+        {
+            for(auto number : numbers) {
+                distinctSlices.insert(std::make_pair(number, A[i]));
+            }
+            distinctSlices.insert(std::make_pair(A[i], A[i]));
+            numbers.insert(A[i]);
+            if (distinctSlices.size() >= 1000000000) {
+                return 1000000000;
+            }
+        }
+
+    for(auto slice : distinctSlices) {
+        std::cout << "(" << slice.first << ", " << slice.second << ")" << std::endl;
+    }
+
+        return distinctSlices.size();
+}
