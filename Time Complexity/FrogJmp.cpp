@@ -27,6 +27,11 @@ Write an efficient algorithm for the following assumptions:
  * X ≤ Y.
 */
 
+
+
+// We solve this problem by finding the total distance 
+// the frog must jump by the difference of the X and Y 
+// ​​and then dividing it by the length of the jump.
 int solution(int X, int Y, int D) {
     // By calculating the difference of X and Y,
     // we get the total distance the frog has to jump
