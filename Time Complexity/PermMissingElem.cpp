@@ -26,6 +26,9 @@ Write an efficient algorithm for the following assumptions:
 
 #include <numeric>
 
+// Here we add the series 1 .. n + 1 and put it in the difference
+// with the sum of all the numbers of the series, 
+// from which we get the missing element.
 int solution(vector<int> &A) {
     return  ((1 + A.size() + 1) * (A.size() + 1) / 2) - std::accumulate(A.begin(), A.end(), 0);
 }
