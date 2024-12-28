@@ -26,3 +26,30 @@ Write an efficient algorithm for the following assumptions:
   *  N is an integer within the range [0..20,000];
   *  each element of array A is an integer within the range [−100..100].
 */
+#include <numeric>
+
+int solution(vector<int> &A) {
+    
+    if (A.size() < 2)
+    {
+        if (A.size() == 0) return 0;
+        return A[0];
+    }
+
+    for (unsigned i = 0; i < A.size(); ++i)
+    {
+        A[i] = std::abs(A[i]);
+    }
+
+    std::sort(A.begin(),A.end());
+
+    int result{std::abs(std::accumulate(A.begin(), A.end(), 0))};
+    int temp_result{result};
+    for (unsigned i = A.size(); temp_result <= result and i > 1; --i)
+    {
+        result = temp_result;
+        temp_result = std::abs(temp_result - 2 * A[i - 1]);
+    }
+
+    return std::min(result, temp_result);
+}
