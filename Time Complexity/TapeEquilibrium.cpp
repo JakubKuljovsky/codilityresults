@@ -52,9 +52,10 @@ int solution(vector<int> &A) {
     {
         left += A[i];
         right -= A[i];
-        if (std::abs(left - right) < lowest)
+        int tempLowest{std::abs(left - right)};
+        if (tempLowest < lowest)
         {
-            lowest = std::abs(left - right);
+            lowest = tempLowest;
         }
     }
     return lowest;
