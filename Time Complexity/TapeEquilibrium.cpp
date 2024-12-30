@@ -47,12 +47,12 @@ Write an efficient algorithm for the following assumptions:
 int solution(vector<int> &A) {
     int sum_from_the_left{A[0]};
     int sum_from_the_right{std::accumulate(A.begin() + 1, A.end(), 0)};
-    int lowest_difference_between_sums{std::abs(left - right)};
+    int lowest_difference_between_sums{std::abs(sum_from_the_left - sum_from_the_right)};
     for (unsigned i = 1; i < A.size() - 1 ; ++i)
     {
-        left += A[i];
-        right -= A[i];
-        int difference_between_sums{std::abs(left - right)};
+        sum_from_the_left += A[i];
+        sum_from_the_right -= A[i];
+        int difference_between_sums{std::abs(sum_from_the_left - sum_from_the_right)};
         if (difference_between_sums < lowest_difference_between_sums)
         {
             lowest_difference_between_sums = difference_between_sums;
