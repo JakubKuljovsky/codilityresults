@@ -45,14 +45,16 @@ Write an efficient algorithm for the following assumptions:
 #include <numeric>  // For std::accumulate
 #include <cmath> // For std::abs
 
-
+// The solution initializes the sums of the left and right parts of the array and iterates through
+// the array to update these sums, calculating the difference between them at each split point.
+// It keeps track of the smallest difference encountered and returns this value as the result.
 int solution(vector<int> &A) {
     // Initialize the sum the first element from the left 
     int sum_from_the_left{A[0]};
     // Calculate the sum of all elements from the second element to the end of the array
     int sum_from_the_right{std::accumulate(A.begin() + 1, A.end(), 0)};
     // Calculate the initial difference between the sum from the left and the sum from right
-    int lowest_difference_between_sums{std::abs(sum_from_the_left - sum_from_the_right)};
+    int smallest_difference_between_sums{std::abs(sum_from_the_left - sum_from_the_right)};
   
     // Iterate through the array from the second element to the second-to-last element
     for (unsigned i = 1; i < A.size() - 1 ; ++i)
@@ -63,12 +65,12 @@ int solution(vector<int> &A) {
         sum_from_the_right -= A[i];
         // Calculate the current difference between the sum from the left and the sum from the right
         int difference_between_sums{std::abs(sum_from_the_left - sum_from_the_right)};
-         // If the current difference is smaller than the smallest difference found so far, update the lowest difference
-        if (difference_between_sums < lowest_difference_between_sums)
+         // If the current difference is smaller than the smallest difference found so far, update the smallest difference
+        if (difference_between_sums < smallest_difference_between_sums)
         {
-            lowest_difference_between_sums = difference_between_sums;
+            smallest_difference_between_sums = difference_between_sums;
         }
     }
-    // Return lowest found difference
-    return lowest_difference_between_sums;
+    // Return smallest found difference
+    return smallest_difference_between_sums;
 }
