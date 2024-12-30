@@ -45,18 +45,18 @@ Write an efficient algorithm for the following assumptions:
 #include <numeric>
 
 int solution(vector<int> &A) {
-    int left{A[0]};
-    int right{std::accumulate(A.begin() + 1, A.end(), 0)};
-    int lowest{std::abs(left - right)};
+    int sum_from_the_left{A[0]};
+    int sum_from_the_right{std::accumulate(A.begin() + 1, A.end(), 0)};
+    int lowest_difference_between_sums{std::abs(left - right)};
     for (unsigned i = 1; i < A.size() - 1 ; ++i)
     {
         left += A[i];
         right -= A[i];
-        int tempLowest{std::abs(left - right)};
-        if (tempLowest < lowest)
+        int difference_between_sums{std::abs(left - right)};
+        if (difference_between_sums < lowest_difference_between_sums)
         {
-            lowest = tempLowest;
+            lowest_difference_between_sums = difference_between_sums;
         }
     }
-    return lowest;
+    return lowest_difference_between_sums;
 }
