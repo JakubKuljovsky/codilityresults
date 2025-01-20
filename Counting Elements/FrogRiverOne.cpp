@@ -51,14 +51,22 @@ Write an efficient algorithm for the following assumptions:
 */
 
 #include <set>
-
+// Here we are looking for a set that contains all elements 
+// from 1 to X and return the first index at which the set will be complete.
 int solution(int X, vector<int> &A) {
+    // Creating a set that we want to fill with the numbers 1 to X.
     std::set<int> leafs;
     for (unsigned i = 0; i < A.size(); ++i)
     {
+      // Insert an element into the set (place of impact of the leaf),
+      // If the set already contains it, it will be ignored
         leafs.insert(A[i]);
         if (leafs.size() == X)
+            // If the size of the set is equal to X, 
+            // It means that all the elements are in the set
             return static_cast<int>(i);
     }
+    
+    // The frog cannot jump to the other side
     return -1;
 }
